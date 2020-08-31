@@ -1,0 +1,23 @@
+/*  global classes  */
+
+button,
+button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.blank {
+  height: 50px;
+}
+
+@media (max-width: 800px) {
+  .blank {
+    height: 350px;
+  }
+}
+
+@media (max-width: 500px) {
+  .blank {
+    height: 20px;
+  }
+}
