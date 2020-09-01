@@ -1,10 +1,11 @@
 <?php
-$stmt = $db->prepare("SELECT * FROM commande WHERE commande_user_id=? ORDER BY RAND()");
+$stmt = $db->prepare("SELECT * FROM commande WHERE commande_user_id=?");
 $stmt->execute(array($_SESSION['id']));
 $rows = $stmt->fetchAll();
 
 
 ?>
+<div class="blank"></div>
 <div class="container mt-3">
     <h2 class="text-center">Mes Commandes</h2>
     <br>
@@ -17,21 +18,33 @@ $rows = $stmt->fetchAll();
             <thead>
                 <tr>
                     <th>Produit</th>
+                    <th>Prix</th>
                     <th>Etat de commande</th>
                 </tr>
             </thead>
             <tbody id="myTable">
                 <?php
                 foreach ($rows as $row) {
-                ?>
-                    <tr>
-                        <td><?php echo fetchOne('product', 'item_id',  $row['commande_item_id'])['item_name'] ?></td>
-                        <td><?php $etat =  $row['commande_status'];
-                            if ($etat == 'ordered') {
-                                echo 'En Attente de livraison';
-                            } ?>
-                        </td>
-                    </tr>
+                    $myCommande = fetchOne('product', 'item_id',  $row['commande_item_id']);
+                ?><form action="changeStatus.php" method="post">
+                        <tr>
+                            <input type="hidden" name="commande_id" value="<?php echo $row['commande_id'] ?>">
+                            <td><img src="<?php echo $myCommande['item_image'] ?>" alt="<?php echo $myCommande['item_name'] ?>" style="height: 50px;"><?php echo $myCommande['item_name'] ?></td>
+                            <td><?php echo $myCommande['item_price'] ?> Dh</td>
+                            <td class="column"><?php $etat =  $row['commande_status'];
+                                                if ($etat == 'ordered') {
+                                                    echo 'En Attente de livraison ';
+                                                } elseif ($etat == 'sent') {
+                                                    echo 'A été envoyé';
+                                                ?>
+                                    <button href="#" name="sentToCompleted" class="btn btn-success">Confirmation réception</button>
+                                <?php
+                                                } elseif ($etat == 'completed') {
+                                                    echo "Commande terminée";
+                                                } ?>
+                            </td>
+                        </tr>
+                    </form>
                 <?php } ?>
             </tbody>
         </table>
@@ -40,14 +53,3 @@ $rows = $stmt->fetchAll();
 
 
 </div>
-
-<script>
-    $(document).ready(function() {
-        $("#myInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
-</script>
