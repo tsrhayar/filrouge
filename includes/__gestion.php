@@ -2,6 +2,7 @@
 $view = isset($_GET['view']) ? $_GET['view'] : "welcome";
 $do = isset($_GET['do']) ? $_GET['do'] : "nothing";
 $products = fetchAll('product');
+$users = fetchAll('user');
 
 if ($view == 'welcome' && $do == 'nothing') {
 ?>
@@ -155,4 +156,44 @@ if ($view == 'welcome' && $do == 'nothing') {
   $stmt->execute(array($item_id));
 
   header("location: gestion.php?view=gestionProduits");
+} elseif ($view == 'gestionMembres' && $do == 'nothing') { ?>
+  <div class="container">
+    <div class="blank"></div>
+    <h2>Gestion des Membes</h2>
+    <div class="table-responsive">
+      <div class="container mt-3">
+        <input class="form-control" id="myInput" type="text" placeholder="Chercher un membre..">
+        <br>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="text-center align-middle">Id</th>
+              <th class="text-center align-middle">Nom d utilisateur</th>
+              <th class="text-center align-middle">Email</th>
+            </tr>
+          </thead>
+          <tbody id="myTable">
+            <?php
+            foreach ($users as $user) {
+            ?>
+              <tr>
+                <td class="text-center align-middle"><?php echo $user['user_id'] ?></td>
+                <td class="text-center align-middle"><?php echo $user['user_username'] ?></td>
+                <td class="text-center align-middle"><?php echo $user['user_email'] ?></td>
+                <td class="text-center align-middle">
+                  <a href="?view=gestionMembres&do=delete&user_id=<?php echo $user['user_id'] ?>" class="btn btn-danger confirm"><i class="fas fa-trash"></i></a>
+                </td>
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<?php } elseif ($view == 'gestionMembres' && $do == 'delete') {
+  $user_id = $_GET['user_id'];
+  $stmt = $db->prepare("DELETE FROM user WHERE user_id = ?");
+  $stmt->execute(array($user_id));
+
+  header("location: gestion.php?view=gestionMembres");
 } ?>
