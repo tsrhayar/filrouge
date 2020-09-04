@@ -1,5 +1,5 @@
 <?php
-$stmt = $db->prepare("SELECT * FROM commande ORDER BY commande_status DESC");
+$stmt = $db->prepare("SELECT * FROM commande ORDER BY commande_status ASC");
 $stmt->execute(array());
 $rows = $stmt->fetchAll();
 
@@ -33,13 +33,13 @@ $rows = $stmt->fetchAll();
                         <td><?php echo $product['item_name'] ?></td>
                         <td><?php echo $user['user_adresse'] ?></td>
                         <td><?php echo $user['user_email'] ?></td>
-                        <td class="column"><?php if ($etat == 'ordered') {  ?>
-                                <p class="bg-danger text-light">En Attente de livraison </p>
-                                <button href="#" name="orderedToSent" class="btn btn-primary">Livrée </button>
-                            <?php } elseif ($etat == 'sent') {
-                                echo '<p class="bg-primary text-light">A été envoyé </p>';
-                            } elseif ($etat == 'completed') {
-                                echo '<p class="bg-success text-light">Commande terminée </p>';
+                        <td class="column"><?php if ($etat == '1ordered') {  ?>
+                                <p class="bg-danger text-light text-center">En Attente de livraison </p>
+                                <button name="orderedToSent" class="btn btn-primary btn-sm text-center">Livrée </button>
+                            <?php } elseif ($etat == '2sent') {
+                                echo '<p class="bg-primary text-light text-center">A été envoyé </p>';
+                            } elseif ($etat == '3completed') {
+                                echo '<p class="bg-success text-light text-center">Commande terminée </p>';
                             } ?>
                         </td>
                 </form>

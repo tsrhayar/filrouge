@@ -21,16 +21,14 @@ if (isset($_GET['item_id'])) {
                         <img src="<?php echo $row['item_image'] ?>" alt="product" class="img-fluid">
                         <div class="form-row pt-4 font-size-16 font-baloo">
                             <?php if (isset($_SESSION['admin']) || isset($_SESSION['user'])) { ?>
-                                <div class="col">
-                                    <button type="submit" class="btn btn-danger form-control">Acheter</button>
-                                </div>
+                                
                                 <div class="col">
                                     <form method="POST" action="?do=addToCart&item_id=<?php echo $row['item_id'] ?>&user_id=<?php echo $_SESSION['id'] ?>">
                                         <button type="submit" class="btn btn-warning form-control">Ajouter Au Pannier</button>
                                     </form>
                                 </div>
                             <?php } else {
-                            } ?>
+                            ?>
 
                             <div class="col">
                                 <a href="login.php" type="submit" class="btn btn-danger form-control">Acheter</a>
@@ -38,7 +36,8 @@ if (isset($_GET['item_id'])) {
                             <div class="col">
                                 <a href="login.php" type="submit" class="btn btn-warning form-control">Ajouter Au Pannier</a>
                             </div>
-                            <?php ?>
+                            <?php } ?>
+
                         </div>
                     </div>
                     <div class="col-sm-6 py-5">
@@ -51,7 +50,7 @@ if (isset($_GET['item_id'])) {
 
                             <tr class="font-rale font-size-14">
                                 <td>Deal Price:</td>
-                                <td class="font-size-20 text-danger">$<span><?php echo $row['item_price'] ?> Dh</span><small class="text-dark font-size-12">&nbsp;&nbsp;Inclusive of all taxes</small></td>
+                                <td class="font-size-20 text-danger"><span><?php echo $row['item_price'] ?> Dh</span><small class="text-dark font-size-12">&nbsp;&nbsp;Inclusive of all taxes</small></td>
                             </tr>
                         </table>
                         <!---    !product price       -->
@@ -110,7 +109,7 @@ if (isset($_GET['item_id'])) {
                                 <div class="qty d-flex">
                                     <h6 class="font-baloo">Qty</h6>
                                     <div class="px-4 d-flex font-rale">
-                                        <input type="number" value="1" min="1" max="10">
+                                        <!-- <input type="number" value="1" min="1" max="10"> -->
                                     </div>
                                 </div>
                                 <!-- !product qty section -->

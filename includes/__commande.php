@@ -1,5 +1,5 @@
 <?php
-$stmt = $db->prepare("SELECT * FROM commande WHERE commande_user_id=?");
+$stmt = $db->prepare("SELECT * FROM commande WHERE commande_user_id=? ORDER BY commande_status ASC");
 $stmt->execute(array($_SESSION['id']));
 $rows = $stmt->fetchAll();
 
@@ -32,14 +32,14 @@ $rows = $stmt->fetchAll();
                             <td><img src="<?php echo $myCommande['item_image'] ?>" alt="<?php echo $myCommande['item_name'] ?>" style="height: 50px;"><?php echo $myCommande['item_name'] ?></td>
                             <td><?php echo $myCommande['item_price'] ?> Dh</td>
                             <td class="column"><?php $etat =  $row['commande_status'];
-                                                if ($etat == 'ordered') {
+                                                if ($etat == '1ordered') {
                                                     echo 'En Attente de livraison ';
-                                                } elseif ($etat == 'sent') {
+                                                } elseif ($etat == '2sent') {
                                                     echo 'A été envoyé';
                                                 ?>
                                     <button href="#" name="sentToCompleted" class="btn btn-success">Confirmation réception</button>
                                 <?php
-                                                } elseif ($etat == 'completed') {
+                                                } elseif ($etat == '3completed') {
                                                     echo "Commande terminée";
                                                 } ?>
                             </td>

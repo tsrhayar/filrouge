@@ -36,7 +36,7 @@
                                 <!-- product qty -->
                                 <div class="qty d-flex pt-2">
                                     <div class="d-flex font-rale w-25">
-                                        <input type="number" value="1" min="1" max="10">
+                                        <!-- <input type="number" value="1" min="1" max="10"> -->
                                     </div>
                                     <form action="" method="POST">
                                         <a type="submit" href="?do=addToCommande&item_id=<?php echo $row['item_id'] ?>&user_id=<?php echo $_SESSION['id'] ?>&cart_id=<?php echo $cart['cart_id'] ?>" class="btn btn-primary font-baloo text-white px-3">Acheter</a>

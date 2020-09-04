@@ -48,9 +48,9 @@ if (isset($_SESSION['admin']) || isset($_SESSION['user'])) {
 <div class="container my-5">
     <h1 class="text-center text-info">Login</h1>
     <form class="px-sm-5" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
-        <label for="username" class="mr-sm-2">Email address</label>
-        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter email" name="username" id="username">
-        <label for="password" class="mr-sm-2">Password:</label>
+        <label for="username" class="mr-sm-2">Nom d'utilisteur</label>
+        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter email" name="username" id="username" autocomplete="off">
+        <label for="password" class="mr-sm-2">Mot de passe</label>
         <input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter password" name="password" id="password">
         <button type="submit" class="btn btn-primary mb-2">Submit</button>
         <br>

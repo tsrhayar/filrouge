@@ -17,3 +17,11 @@ function fetchOne($from, $where, $myVar)
     $stmt->execute(array($myVar));
     return  $stmt->fetch();
 }
+
+function fetchAll($from)
+{
+    global $db;
+    $stmt = $db->prepare("SELECT * FROM $from");
+    $stmt->execute(array());
+    return  $stmt->fetchAll();
+}

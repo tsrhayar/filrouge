@@ -17,6 +17,7 @@
             $email = $_POST['email'];
             $password = $_POST['password'];
             $confirmpassword = $_POST['confirmpassword'];
+            $adress = $_POST['adress'];
 
             if (checkIfExists("user_username", "user", $username) > 0) {
                 echo '<div class="container">
@@ -32,8 +33,8 @@
             </div>';
             } else {
                 if ($password == $confirmpassword) {
-                    $stmt = $db->prepare("INSERT INTO user ( user_username, user_email, user_password) VALUES (?, ?, ?)");
-                    $stmt->execute(array($username, $email, $password));
+                    $stmt = $db->prepare("INSERT INTO user ( user_username, user_email, user_password, user_adresse) VALUES (?, ?, ?, ?)");
+                    $stmt->execute(array($username, $email, $password, $adress));
                     $count = $stmt->rowCount();
                     if ($count > 0) {
                         echo '<div class="container"><div class="alert alert-success alert-dismissible m-0">
@@ -82,6 +83,8 @@
         <input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter password" name="password" required autocomplete="off">
         <label for="password" class="mr-sm-2">Confirmer Mot De Passe:</label>
         <input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter password" name="confirmpassword" required autocomplete="off">
+        <label for="password" class="mr-sm-2">Adress</label>
+        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter Adress" name="adress" required autocomplete="off">
         <button type="submit" class="btn btn-primary mb-2">Submit</button>
     </form>
 </div>

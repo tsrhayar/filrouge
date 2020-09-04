@@ -32,17 +32,18 @@
                 <?php if (isset($_SESSION['admin']) || isset($_SESSION['user'])) {
                 ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="commande.php">Mes Commande</a>
+                        <a class="nav-link" href="commande.php">Mes Commandes</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Mon Compte</a>
-                    </li>
+                    
                 <?php }
                 ?>
                  <?php if (isset($_SESSION['admin'])) {
                 ?>
                     <li class="nav-item">
                         <a class="nav-link" href="allCommande.php">Tous les Commandes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gestion.php">Gestion</a>
                     </li>
                 <?php }
                 ?>
